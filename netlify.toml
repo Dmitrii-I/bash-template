@@ -17,5 +17,5 @@
 
   # You can also define custom headers within your redirects blocks.
   [redirects.headers]
-    Content-Type = "text/plain"
+    Content-Type = "text/html"
 
