@@ -15,4 +15,4 @@
   for = "/index.html"
 
   [headers.values]
-    Content-Type = "text/plain; charset=UTF-8"
+    Content-Type = "text/html; charset=UTF-8"
