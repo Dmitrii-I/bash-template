@@ -9,6 +9,8 @@
   [headers.values]
     Website-Version = "01"
 
+# Note that `/index.html` and `/` are not the same in Netlify even though
+# index.html gets served at both locations.
 [[headers]]
   for = "/index.html"
   [headers.values]
