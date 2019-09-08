@@ -1,4 +1,4 @@
-# www.bash-template
+# bash-template
 Template script for defensive bash programming
 
 ## Usage
