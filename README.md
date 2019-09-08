@@ -2,7 +2,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/27f68a8d-1ace-4287-8df5-61a587c47fba/deploy-status)](https://app.netlify.com/sites/bash-template/deploys)
 
-Template script for defensive bash programming
+Template script for defensive bash programming.
 
 ## Usage
 
