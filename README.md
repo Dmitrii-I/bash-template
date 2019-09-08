@@ -3,6 +3,9 @@ Template script for defensive bash programming
 
 ## Usage
 
+### Web browser
+Open [https://bash-template.netlify.com](https://bash-template.netlify.com), then copy and paste.
+
 ### wget
 `wget -O - https://bash-template.netlify.com -o /dev/null`
 
