@@ -4,16 +4,16 @@ Template script for defensive bash programming
 ## Usage
 
 ### Web browser
-Open [https://bash-template.netlify.com](https://bash-template.netlify.com), then copy and paste.
+Open [http://bash-template.com](http://bash-template.com), then copy and paste.
 
 ### wget
-`wget -O - https://bash-template.netlify.com -o /dev/null`
+`wget -O - http://bash-template.com -o /dev/null`
 
 ### HTTPie
-`http -b https://bash-template.netlify.com`
+`http -b http://bash-template.com`
 
 ### curl
-`curl https://bash-template.netlify.com`
+`curl http://bash-template.com`
 
 ## Building website
 Run `make www` to build the static website inside `www` directory.
