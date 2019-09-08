@@ -5,8 +5,16 @@
   publish = "www"
 
 [[headers]]
-  for = [ "/index.html", "/" ]
+  for = "/*"
+  [headers.values]
+    Website-Version = "01"
 
+[[headers]]
+  for = "/index.html"
   [headers.values]
     Content-Type = "text/plain; charset=ascii"
-    Website-Version = "01"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Content-Type = "text/plain; charset=ascii"
