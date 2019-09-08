@@ -5,7 +5,7 @@
   publish = "www"
 
 [[headers]]
-  for = "/index.html"
+  for = [ "/index.html", "/" ]
 
   [headers.values]
     Content-Type = "text/plain; charset=ascii"
