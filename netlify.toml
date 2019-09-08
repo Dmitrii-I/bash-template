@@ -9,3 +9,4 @@
 
   [headers.values]
     Content-Type = "text/plain; charset=ascii"
+    Website-Version = "01"
