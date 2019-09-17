@@ -22,7 +22,7 @@
     Content-Type = "text/plain; charset=UTF-8"
 
 [[redirects]]
-  from = "http://bash-template.com"
+  from = "http://bash-template.com/*"
   to = "https://bash-template.com"
   status = 200
   force = true
