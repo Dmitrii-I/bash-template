@@ -25,3 +25,4 @@
   from = "http://bash-template.com"
   to = "https://bash-template.com"
   status = 200
+  force = true
