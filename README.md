@@ -23,3 +23,6 @@ Run `make www` to build the static website inside `www` directory.
 
 ## Website hosting
 I tried hosting on [zeit.co](https://zeit.co), but they [do not support](https://github.com/zeit/now/issues/1745) turning off http to https redirects. This means `curl bash-template.com` won't work, and you must use `curl -L bash-template.com`. I do not want that since it is easy to forget that you must use `-L`.
+
+[Netlify](https://www.netlify.com) is also out of the picture because they [stopped](https://github.com/netlify/cli/issues/158#issuecomment-431160309) supporting HTTP.
+
