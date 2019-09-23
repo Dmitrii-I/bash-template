@@ -26,5 +26,5 @@ I tried hosting on [zeit.co](https://zeit.co), but they [do not support](https:/
 
 [Netlify](https://www.netlify.com) is also out of the picture because they [stopped](https://github.com/netlify/cli/issues/158#issuecomment-431160309) supporting HTTP.
 
-[Surge](https://surge.sh) on the other hand does allow both http and https, but the redirects/rewrites are a [paid feature](https://surge.sh/help/adding-redirects). We need redirects because we want to redirect all requests to `template.sh` file.
+[Surge](https://surge.sh) on the other hand does allow both http and https, but the redirects/rewrites are a [paid feature](https://surge.sh/help/adding-redirects). We need redirects because we want to redirect requests for `index.html` to `template.sh` file.
 
