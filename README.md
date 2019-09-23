@@ -20,3 +20,6 @@ Open [http://www.bash-template.com](http://www.bash-template.com), then copy and
 
 ## Building website
 Run `make www` to build the static website inside `www` directory.
+
+## Website hosting
+I tried hosting on [zeit.co](https://zeit.co), but they [do not support](https://github.com/zeit/now/issues/1745) turning off http to https redirects. This means `curl bash-template.com` won't work, and you must use `curl -L bash-template.com`. I do not want that since it is easy to forget that you must use `-L`.
