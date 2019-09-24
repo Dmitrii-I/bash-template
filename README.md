@@ -28,3 +28,4 @@ I tried hosting on [zeit.co](https://zeit.co), but they [do not support](https:/
 
 [Surge](https://surge.sh) on the other hand does allow both http and https, but the redirects/rewrites are a [paid feature](https://surge.sh/help/adding-redirects). We need redirects because we want to redirect requests for `index.html` to `template.sh` file.
 
+Heroku is an option even though we would be serving static content akwardly through a web app. A minor point is that Herok's free tier [does not](https://www.heroku.com/dynos) support SSL on custom domains.
