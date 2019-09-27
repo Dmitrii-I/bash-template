@@ -41,7 +41,7 @@ resource "aws_s3_bucket" "site" {
   policy = data.aws_iam_policy_document.website.json
 
   website {
-    index_document = "index.html"
+    index_document = "template.sh"
     error_document = "error.html"
   }
 
