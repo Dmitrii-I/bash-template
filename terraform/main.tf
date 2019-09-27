@@ -21,10 +21,24 @@ resource "aws_s3_bucket" "logs" {
   acl = "log-delivery-write"
 }
 
+data "aws_iam_policy_document" "website" {
+  statement {
+    sid         = "PublicReadGetObject"
+    effect      = "Allow"
+    actions     = ["s3:GetObject"]
+    resources   = ["arn:aws:s3:::${local.site_names[terraform.workspace]}/*"]
+    principals {
+      identifiers = ["*"]
+      type = "*"
+    }
+  }
+}
+
 resource "aws_s3_bucket" "site" {
 
   bucket = local.site_names[terraform.workspace]
   acl    = "public-read"
+  policy = data.aws_iam_policy_document.website.json
 
   website {
     index_document = "index.html"
