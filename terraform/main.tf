@@ -10,6 +10,7 @@ terraform {
 }
 
 locals {
+  domain_name         = "bash-template.com"
   aws_default_region  = "eu-central-1"
   website_bucket      = "bash-template-site"
   website_logs_bucket = "bash-template-site-logs"
@@ -63,4 +64,30 @@ resource "aws_s3_bucket_object" "template" {
   key     = "template.sh"
   source  = "../template.sh"
   etag    = filemd5("../template.sh")
+}
+
+resource "aws_route53_zone" "bash_template_com" {
+  name = local.domain_name
+}
+
+resource "aws_route53_record" "apex" {
+  zone_id = aws_route53_zone.bash_template_com.zone_id
+  name    = local.domain_name
+  type    = "A"
+  alias {
+    name                    = aws_s3_bucket.site.website_endpoint
+    zone_id                 = aws_s3_bucket.site.hosted_zone_id
+    evaluate_target_health  = false
+  }
+}
+
+resource "aws_route53_record" "www" {
+  zone_id = aws_route53_zone.bash_template_com.zone_id
+  name    = "www.${local.domain_name}"
+  type    = "A"
+  alias {
+    name                    = aws_s3_bucket.site.website_endpoint
+    zone_id                 = aws_s3_bucket.site.hosted_zone_id
+    evaluate_target_health  = false
+  }
 }
