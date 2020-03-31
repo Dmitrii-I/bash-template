@@ -1,24 +1,31 @@
-locals {
-  site_names = {
-    "prod": "bash-template.com",
-    "dev": "bash-template.com-dev"
+terraform {
+  backend "remote" {
+    hostname      = "app.terraform.io"
+    organization  = "bash-template"
+
+    workspaces {
+      prefix = "bash-template-"
+    }
   }
 }
 
-terraform {
-  backend "local" {
-    path = "~/bash-template/terraform/terraform.tfstate"
-  }
+locals {
+  aws_default_region  = "eu-central-1"
+  website_bucket      = "bash-template-site"
+  website_logs_bucket = "bash-template-site-logs"
 }
 
 provider "aws" {
-  region    = var.aws_region
-  profile   = "dmitrii-bash-template.com"
+  region              = local.aws_default_region
+  profile             = "8f302fabec669d3401657e9e71b29b46"
+  allowed_account_ids = [
+    "173724624509"
+  ]
 }
 
 resource "aws_s3_bucket" "logs" {
-  bucket = "${local.site_names[terraform.workspace]}-site-logs"
-  acl = "log-delivery-write"
+  bucket  = local.website_logs_bucket
+  acl     = "log-delivery-write"
 }
 
 data "aws_iam_policy_document" "website" {
@@ -26,7 +33,7 @@ data "aws_iam_policy_document" "website" {
     sid         = "PublicReadGetObject"
     effect      = "Allow"
     actions     = ["s3:GetObject"]
-    resources   = ["arn:aws:s3:::${local.site_names[terraform.workspace]}/*"]
+    resources   = ["arn:aws:s3:::${local.website_bucket}/*"]
     principals {
       identifiers = ["*"]
       type = "*"
@@ -36,7 +43,7 @@ data "aws_iam_policy_document" "website" {
 
 resource "aws_s3_bucket" "site" {
 
-  bucket = local.site_names[terraform.workspace]
+  bucket = local.website_bucket
   acl    = "public-read"
   policy = data.aws_iam_policy_document.website.json
 
@@ -49,6 +56,5 @@ resource "aws_s3_bucket" "site" {
     target_bucket = aws_s3_bucket.logs.id
     target_prefix = ""
   }
-
 }
 
