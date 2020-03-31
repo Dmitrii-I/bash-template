@@ -58,3 +58,9 @@ resource "aws_s3_bucket" "site" {
   }
 }
 
+resource "aws_s3_bucket_object" "template" {
+  bucket  = local.website_bucket
+  key     = "template.sh"
+  source  = "../template.sh"
+  etag    = filemd5("../template.sh")
+}
