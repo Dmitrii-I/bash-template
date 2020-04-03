@@ -152,7 +152,7 @@ resource "aws_cloudfront_distribution" "bash-template" {
   }
 
   enabled             = true
-  default_root_object = "index.html"
+  default_root_object = "template.sh"
 
   // All values are defaults from the AWS console.
   default_cache_behavior {
