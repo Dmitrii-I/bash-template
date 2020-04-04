@@ -134,21 +134,16 @@ resource "aws_acm_certificate_validation" "bash-template-com" {
 
 
 resource "aws_cloudfront_distribution" "bash-template" {
-  // origin is where CloudFront gets its content from.
   origin {
-    // We need to set up a "custom" origin because otherwise CloudFront won't
-    // redirect traffic from the root domain to the www domain, that is from
-    // runatlantis.io to www.runatlantis.io.
+    domain_name = aws_s3_bucket.site.website_endpoint
+    origin_id   = aws_s3_bucket.site.bucket_domain_name
+
     custom_origin_config {
-      // These are all the defaults.
       http_port              = "80"
       https_port             = "443"
       origin_protocol_policy = "http-only"
       origin_ssl_protocols   = ["TLSv1", "TLSv1.1", "TLSv1.2"]
     }
-
-    domain_name = aws_s3_bucket.site.website_endpoint
-    origin_id   = aws_s3_bucket.site.bucket_domain_name
   }
 
   enabled             = true
