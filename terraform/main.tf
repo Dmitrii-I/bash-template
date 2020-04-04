@@ -37,8 +37,17 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "logs" {
-  bucket  = local.website_logs_bucket
-  acl     = "log-delivery-write"
+  bucket        = local.website_logs_bucket
+  acl           = "log-delivery-write"
+  force_destroy = true  # allow bucket to be destroyed if it contains objects
+
+  lifecycle_rule {
+    id      = "delete-after-14-days"
+    enabled = true
+    expiration {
+      days = 14
+    }
+  }
 }
 
 data "aws_iam_policy_document" "website" {
