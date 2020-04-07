@@ -22,5 +22,5 @@ jobs:
       run: ln -s $(pwd) ~/bash-template
 
     - name: test website contents
-      shell: bash
+      shell: bash {0}
       run: ~/bash-template/tests/test-website.sh
