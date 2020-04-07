@@ -1,6 +1,6 @@
 # bash-template
 
-![https://github.com/Dmitrii-I/sportmonks/actions?query=workflow%3Atests](https://github.com/Dmitrii-I/sportmonks/workflows/tests/badge.svg)
+![https://github.com/Dmitrii-I/bash-template/actions?query=workflow%3Atests](https://github.com/Dmitrii-I/bash-template/workflows/tests/badge.svg)
 
 Template script for defensive bash programming.
 
