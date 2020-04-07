@@ -14,6 +14,7 @@ locals {
   aws_default_region  = "eu-central-1"
   website_bucket      = "bash-template.com"
   website_logs_bucket = "bash-template-site-logs"
+  budget_alerts_email = var.budget_alerts_email
 }
 
 provider "aws" {
@@ -198,4 +199,34 @@ resource "aws_cloudfront_distribution" "bash-template" {
   }
 
   depends_on = [aws_acm_certificate_validation.bash-template-com]
+}
+
+resource "aws_budgets_budget" "total" {
+  name              = "monthly-total"
+  budget_type       = "COST"
+  limit_amount      = "10"
+  limit_unit        = "USD"
+  time_period_start = "2020-04-01_00:00"
+  time_unit         = "MONTHLY"
+
+  notification {
+    comparison_operator        = "GREATER_THAN"
+    threshold                  = 100
+    threshold_type             = "PERCENTAGE"
+    notification_type          = "FORECASTED"
+    subscriber_email_addresses = [local.budget_alerts_email]
+  }
+
+  cost_types {
+    include_credit             = false
+    include_discount           = true
+    include_other_subscription = true
+    include_recurring          = true
+    include_refund             = false
+    include_subscription       = true
+    include_support            = true
+    include_tax                = true
+    include_upfront            = true
+    use_blended                = false
+  }
 }
