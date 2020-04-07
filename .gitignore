@@ -1,3 +1,4 @@
 www/
 terraform.tfstate.d/
 .terraform/
+*.swp
