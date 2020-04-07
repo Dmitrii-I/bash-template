@@ -40,7 +40,7 @@ for url in $urls; do
     diff <(wget -O - http://www.bash-template.com -o /dev/null) ~/bash-template/template.sh
 
     echo "Get website with http"
-    diff <(http --body http://www.bash-template.com 2>/dev/null) ~/bash-template/template.sh
+    diff <(http --body GET http://www.bash-template.com 2>/dev/null) ~/bash-template/template.sh
 
 done
 
