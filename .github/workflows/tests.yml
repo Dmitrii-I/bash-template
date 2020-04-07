@@ -21,6 +21,11 @@ jobs:
     - name: create symlink
       run: ln -s $(pwd) ~/bash-template
 
+    - name: install APT packages
+      run: |
+        sudo apt-get install curl
+        sudo apt-get install httpie
+
     - name: test website contents
       shell: bash {0}
       run: ~/bash-template/tests/test-website.sh
