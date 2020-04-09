@@ -9,3 +9,7 @@ output "name_servers" {
 output cloudfront_domain_name {
   value = aws_cloudfront_distribution.bash-template.domain_name
 }
+
+output "cloudfront_distribution_id" {
+  value = aws_cloudfront_distribution.bash-template.id
+}
