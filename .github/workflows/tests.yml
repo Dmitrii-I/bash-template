@@ -54,4 +54,5 @@ jobs:
         echo -e "credentials \"app.terraform.io\" {\n  token = \"${TERRAFORM_TOKEN}\"\n}" > /tmp/terraformrc
         cd ~/bash-template/terraform
         TF_CLI_CONFIG_FILE=/tmp/terraformrc /tmp/terraform init
+        TF_CLI_CONFIG_FILE=/tmp/terraformrc /tmp/terraform workspace select prod
         TF_CLI_CONFIG_FILE=/tmp/terraformrc /tmp/terraform plan -var="budget_alerts_email=${BUDGET_ALERTS_EMAIL}" -var="aws_profile=bash-template-read-only" -detailed-exitcode
