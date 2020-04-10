@@ -21,11 +21,12 @@ trap 'on_error $LINENO' ERR
 trap on_exit EXIT
 trap on_interrupt INT
 
-cloudfront_distribution_id="$(cd ~/bash-template/terraform; terraform output cloudfront_distribution_id)"
+cd ~/bash-template/terraform
+cloudfront_distribution_id="$(TF_CLI_CONFIG_FILE=~/.terraformrc-bash-template terraform output cloudfront_distribution_id)"
 
 aws cloudwatch get-metric-statistics \
     --region us-east-1 \
-    --profile 8f302fabec669d3401657e9e71b29b46 \
+    --profile bash-template-read-only \
     --start-time "$(date --utc --iso-8601 -d '-14 days')T00:00:00Z" \
     --end-time "$(date --utc --iso-8601 -d '+1 day')T00:00:00Z" \
     --namespace "AWS/CloudFront" \
