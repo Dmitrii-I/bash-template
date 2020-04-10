@@ -2,7 +2,10 @@
 
 This directory contains Terraform configuration.
 
-Terraform state is stored locally but is not in git. We store in git the zipped and encrypted Terraform state. The command we use: `zip -r terraform.tfstate.d.zip terraform.tfstate.d --encrypt`. Because of this, we must not forget to save the state in git everytime it changes.
+To run terraform, use this template:
 
-We tried to use S3 backend but it is not possible to do it the way we want because Terraform does not allow variables in `terraform` block, which leads to repetitive hard-coded values in multiple modules.
+```
+TF_CLI_CONFIG_FILE=~/.terraformrc-bash-template terraform plan -var="budget_alerts_email=me@example.com" -var="aws_profile=bash-template"
+```
 
+The file `~/.terraformrc-bash-template` should contain credentials block with the Terraform user token.
