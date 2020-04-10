@@ -51,34 +51,58 @@ resource "aws_s3_bucket" "logs" {
   }
 }
 
+resource "aws_s3_bucket_public_access_block" "logs" {
+  bucket                  = aws_s3_bucket.logs.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
 data "aws_iam_policy_document" "website" {
   statement {
-    sid         = "PublicReadGetObject"
     effect      = "Allow"
     actions     = ["s3:GetObject"]
-    resources   = ["arn:aws:s3:::${local.website_bucket}/*"]
+    resources   = ["${aws_s3_bucket.site.arn}/*"]
+
     principals {
-      identifiers = ["*"]
-      type = "*"
+      type        = "AWS"
+      identifiers = [aws_cloudfront_origin_access_identity.bash-template.iam_arn]
+    }
+  }
+
+  statement {
+    effect      = "Allow"
+    actions     = ["s3:ListBucket"]
+    resources   = [aws_s3_bucket.site.arn]
+
+    principals {
+      type        = "AWS"
+      identifiers = [aws_cloudfront_origin_access_identity.bash-template.iam_arn]
     }
   }
 }
 
 resource "aws_s3_bucket" "site" {
-
   bucket = local.website_bucket
-  acl    = "public-read"
-  policy = data.aws_iam_policy_document.website.json
-
-  website {
-    index_document = "template.sh"
-    error_document = "error.html"
-  }
-
+  acl    = "private"
   logging {
     target_bucket = aws_s3_bucket.logs.id
     target_prefix = ""
   }
+}
+
+resource "aws_s3_bucket_policy" "bash-template" {
+  bucket = aws_s3_bucket.site.id
+  policy = data.aws_iam_policy_document.website.json
+}
+
+resource "aws_s3_bucket_public_access_block" "site" {
+  bucket                  = aws_s3_bucket.site.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 resource "aws_s3_bucket_object" "template" {
@@ -142,17 +166,17 @@ resource "aws_acm_certificate_validation" "bash-template-com" {
   validation_record_fqdns = [aws_route53_record.certificate-validation.fqdn]
 }
 
+resource "aws_cloudfront_origin_access_identity" "bash-template" {
+  comment = "Origin Access Identify that CloudFront will use to access the website bucket."
+}
 
 resource "aws_cloudfront_distribution" "bash-template" {
   origin {
-    domain_name = aws_s3_bucket.site.website_endpoint
+    domain_name = aws_s3_bucket.site.bucket_regional_domain_name
     origin_id   = aws_s3_bucket.site.bucket_domain_name
 
-    custom_origin_config {
-      http_port              = "80"
-      https_port             = "443"
-      origin_protocol_policy = "http-only"
-      origin_ssl_protocols   = ["TLSv1", "TLSv1.1", "TLSv1.2"]
+    s3_origin_config {
+      origin_access_identity = aws_cloudfront_origin_access_identity.bash-template.cloudfront_access_identity_path
     }
   }
 
