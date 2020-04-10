@@ -31,7 +31,7 @@ provider "aws" {
   # as required by CloudFront.
   alias               = "us-east-1"
   region              = "us-east-1"
-  profile             = "8f302fabec669d3401657e9e71b29b46"
+  profile             = var.aws_profile
   allowed_account_ids = [
     "173724624509"
   ]
