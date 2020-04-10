@@ -243,3 +243,17 @@ resource "aws_iam_user_policy_attachment" "read-only" {
 resource "aws_iam_access_key" "read-only" {
   user = aws_iam_user.read-only.name
 }
+
+data "aws_iam_policy_document" "read-only" {
+  statement {
+    effect      = "Allow"
+    actions     = ["budgets:ViewBudget"]
+    resources   = ["*"]
+  }
+}
+
+resource "aws_iam_user_policy" "read-only" {
+  name    = "read-only"
+  user    = aws_iam_user.read-only.name
+  policy  = data.aws_iam_policy_document.read-only.json
+}
