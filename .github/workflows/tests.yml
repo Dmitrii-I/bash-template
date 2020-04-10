@@ -42,6 +42,7 @@ jobs:
         sudo pip install awscli
         aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID" --profile bash-template-read-only
         aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY" --profile bash-template-read-only
+        aws iam list-users --profile bash-template-read-only
 
     - name: Install terraform, configure it, then check for pending changes (fail if there are any)
       env:
