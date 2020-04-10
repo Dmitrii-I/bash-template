@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
+# bash-template.com, version 1
 
-set -o nounset      # exit with non-zero status if expansion is attempted on an unset variable
-set -o errexit      # exit immediatelly if a pipeline, a list, or a compound command fails
-set -o pipefail     # failures in pipe in the commands before last one, also count as failures
+set -o nounset
+set -o errexit
+set -o pipefail
 
-# Trapping non-zero exit codes:
 on_error() {
-    line_num="$1"
-    echo "Caught error on line $line_num"
+    echo "Caught error on line $1"
 }
 
 on_exit() {
