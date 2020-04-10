@@ -13,7 +13,7 @@ Open [https://www.bash-template.com](https://www.bash-template.com), then copy a
 `wget -O - bash-template.com -o /dev/null`
 
 ### HTTPie
-`http -b bash-template.com`
+`http -b GET bash-template.com`
 
 ### curl
 `curl bash-template.com`
