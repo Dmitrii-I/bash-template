@@ -29,3 +29,7 @@ jobs:
     - name: test website contents
       shell: bash {0}
       run: ~/bash-template/tests/test-website.sh
+
+    - name: test shell scripts with shellcheck
+      shell: bash {0}
+      run: ~/bash-template/tests/test-shell-scripts-with-shellcheck.sh
