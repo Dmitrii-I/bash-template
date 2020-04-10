@@ -34,7 +34,7 @@ for url in $urls; do
     echo "Test that contents of $url are same as template.sh."
 
     echo "Get website with curl"
-    diff <(curl --silent $url) ~/bash-template/template.sh
+    diff <(curl --silent "$url") ~/bash-template/template.sh
 
     echo "Get website with wget"
     diff <(wget -O - http://www.bash-template.com -o /dev/null) ~/bash-template/template.sh
