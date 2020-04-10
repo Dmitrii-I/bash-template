@@ -37,10 +37,10 @@ for url in $urls; do
     diff <(curl --silent "$url") ~/bash-template/template.sh
 
     echo "Get website with wget"
-    diff <(wget -O - http://www.bash-template.com -o /dev/null) ~/bash-template/template.sh
+    diff <(wget -O - "$url" -o /dev/null) ~/bash-template/template.sh
 
     echo "Get website with http"
-    diff <(http --body GET http://www.bash-template.com 2>/dev/null) ~/bash-template/template.sh
+    diff <(http --body GET "$url" 2>/dev/null) ~/bash-template/template.sh
 
 done
 
