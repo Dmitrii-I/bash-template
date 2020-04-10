@@ -230,3 +230,16 @@ resource "aws_budgets_budget" "total" {
     use_blended                = false
   }
 }
+
+resource "aws_iam_user" "read-only" {
+  name = "read-only"
+}
+
+resource "aws_iam_user_policy_attachment" "read-only" {
+  user       = aws_iam_user.read-only.name
+  policy_arn = "arn:aws:iam::aws:policy/ReadOnlyAccess"
+}
+
+resource "aws_iam_access_key" "read-only" {
+  user = aws_iam_user.read-only.name
+}
