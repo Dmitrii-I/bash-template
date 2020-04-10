@@ -20,7 +20,7 @@ locals {
 provider "aws" {
   # No alias set, meaning this is the default provider for all resources.
   region              = local.aws_default_region
-  profile             = "8f302fabec669d3401657e9e71b29b46"
+  profile             = var.aws_profile
   allowed_account_ids = [
     "173724624509"
   ]
