@@ -11,7 +11,7 @@ cat ~/bash-template/template.sh >> "$script"
 echo 'echo foo bar' >> "$script"
 $script > /dev/null
 exit_code=$?
-rm "$script"
+rm $script
 test $exit_code -eq 0
 
 echo Test referencing unset variable
