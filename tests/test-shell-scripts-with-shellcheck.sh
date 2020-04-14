@@ -1,25 +1,6 @@
 #!/usr/bin/env bash
 
-set -o nounset      # exit with non-zero status if expansion is attempted on an unset variable
-set -o errexit      # exit immediatelly if a pipeline, a list, or a compound command fails
-set -o pipefail     # failures in pipe in the commands before last one, also count as failures
-
-# Trapping non-zero exit codes:
-on_error() {
-    line_num="$1"
-    echo "Caught error on line $line_num"
-}
-
-on_exit() {
-    true
-}
-
-on_interrupt() {
-    true
-}
-trap 'on_error $LINENO' ERR
-trap on_exit EXIT
-trap on_interrupt INT
+POSIXLY_CORRECT=1 set -o errexit && set -o nounset && set -o pipefail && unset POSIXLY_CORRECT
 
 echo Test shell scripts with shellcheck
 find ~/bash-template -iname '*.sh' -exec shellcheck {} \;
