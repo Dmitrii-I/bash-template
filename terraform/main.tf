@@ -24,6 +24,7 @@ provider "aws" {
   allowed_account_ids = [
     "173724624509"
   ]
+  version = "~> 2.7"
 }
 
 provider "aws" {
@@ -35,6 +36,7 @@ provider "aws" {
   allowed_account_ids = [
     "173724624509"
   ]
+  version = "~> 2.7"
 }
 
 resource "aws_s3_bucket" "logs" {
