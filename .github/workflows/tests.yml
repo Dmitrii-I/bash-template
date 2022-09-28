@@ -55,8 +55,8 @@ jobs:
         BUDGET_ALERTS_EMAIL: ${{ secrets.BUDGET_ALERTS_EMAIL }}
       run: |
         cd /tmp
-        wget https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip
-        unzip terraform_0.12.24_linux_amd64.zip
+        wget https://releases.hashicorp.com/terraform/0.12.31/terraform_0.12.31_linux_amd64.zip
+        unzip terraform_0.12.31_linux_amd64.zip
         echo -e "credentials \"app.terraform.io\" {\n  token = \"${TERRAFORM_TOKEN}\"\n}" > /tmp/terraformrc
         cd ~/bash-template/terraform
         mkdir .terraform
